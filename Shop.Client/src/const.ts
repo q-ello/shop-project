@@ -1,0 +1,1 @@
+export const defaultImg = 'https://smartlanding.biz/wp-content/uploads/2015/03/kartinki-zaglushki.png'

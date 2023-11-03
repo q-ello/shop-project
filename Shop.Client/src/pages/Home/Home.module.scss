@@ -1,0 +1,28 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    min-height: 100vh;
+    padding-top: 200px;
+}
+
+.button {
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+    background-color: #B1B1B1;
+    margin: 5px;
+
+    &:hover {
+        background-color: #C1C1C1;
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: #000000;
+}
+
+.span {
+    font-weight: 600;
+}

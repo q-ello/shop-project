@@ -1,0 +1,20 @@
+
+.link {
+    text-decoration: none;
+    color: #000000;
+
+    &:hover {
+        color: #555555;
+    }
+}
+
+.rel_prod {
+    margin-right: 15px;
+    background-color: #989898;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.h4 {
+    margin: 5px;
+}
