@@ -5,14 +5,18 @@ import { initServer } from './Server/services/server'
 import { initDataBase } from './Server/services/db'
 import ShopAPI from './Shop.API'
 import ShopAdmin from './Shop.Admin'
+import {Server} from 'socket.io'
+import { initSocketServer } from './Server/services/socket'
 
 
 export let server: Express
 export let connection: Connection
+export let ioServer: Server
 
 async function launchApplication() {
     server = initServer()
     connection = await initDataBase()
+    ioServer = initSocketServer(server)
 
     initRouter()
 }

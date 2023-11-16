@@ -13,21 +13,15 @@
 
 <body>
     <header class="header">
+        <% if (!location.includes("/login")) { %>
+            <a href="<% `/${process.env.ADMIN_PATH}/new-product` %>">ADD PRODUCT</a>
+        <% } %>
         <div class="logo"></div>
-        
             <div>
                 <a href="<%= `/${process.env.ADMIN_PATH}/auth/logout` %>">LOGOUT</a>
             </div>
-        
-        
     </header>
     <div class="container">
-        <div><%= locals.work%></div>
-        <!-- <% if (locals.logged_in) {%> -->
-        <div class="add-product">
-            <a href="<%= `/${process.env.ADMIN_PATH}/new-product` %>">Add product</a>
-        </div>
-        <!-- <%}%> -->
         <%- body %>
     </div>
 </body>

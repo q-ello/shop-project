@@ -4,10 +4,11 @@ import { ICommentEntity, IImageEntity, IProductEntity, IProductSearchFilter, Ima
 import { mapCommentsEntity, mapImageEntity, mapImagesEntity, mapProductsEntity } from "../services/mapping";
 import { enhanceProductsComments, enhanceProductsImages, getProductsFilterQuery } from "../helpers";
 import { v4 as uuidv4 } from 'uuid'
-import { ResultSetHeader } from "mysql2/promise";
+import { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import { DELETE_IMAGES_QUERY, INSERT_IMAGES_QUERY, INSERT_PRODUCT_QUERY, REPLACE_PRODUCT_THUMBNAIL, UPDATE_PRODUCT_FIELDS } from "../services/queries";
 import { IImage, IProduct } from "@Shared/types";
 import { body, param, validationResult } from "express-validator";
+import {ioServer} from '../../../index'
 
 export const productsRouter = Router()
 
@@ -122,6 +123,10 @@ productsRouter.post('/', async (req: Request<{}, {}, ProductCreatePayload>, res:
             images,
             thumbnail
         }
+
+        const [products] = await connection.query<RowDataPacket[]>('select * from products')
+
+        ioServer.emit('update products count', products?.length || 0)
 
         res.status(201)
         res.send(newProduct)

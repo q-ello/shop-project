@@ -1,4 +1,4 @@
-import express, {Express} from "express"
+import express, {Express, NextFunction, Request, Response} from "express"
 import { ProductsRouter } from "./controllers/products.controller"
 import layouts from 'express-ejs-layouts'
 import bodyParser from 'body-parser'
@@ -21,6 +21,11 @@ export default function (): Express {
     app.set('views', 'Shop.Admin/views')
 
     app.use(layouts)
+
+    app.use((req: Request, res: Response, next: NextFunction) => {
+        res.locals.location = req.headers.host + req.originalUrl
+        next()
+    })
 
     app.use(express.static(__dirname + '/public'))
 
